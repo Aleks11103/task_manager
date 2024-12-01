@@ -28,12 +28,24 @@ class TaskManager:
         return "\n".join([el.__str__() for el in self.tasks_list])
 
     # Создание новой задачи
-    def new_task(
-        self, title, description, category, due_date, priority, status
-    ):
+    def new_task(self, title, description, category, due_date, priority):
         self.tasks_list.append(
-            Task(title, description, category, due_date, priority, status)
+            Task(title, description, category, due_date, priority)
         )
+
+    # Отображение задач выбранной категории
+    def show_category_tasks(self, category):
+        flag = False
+        res = []
+        for task in self.tasks_list:
+            if task.category.capitalize() != category:
+                continue
+            res.append(task.__str__())
+            flag = True
+        if flag:
+            print("\n".join(res))
+        else:
+            print("Нет задач в данной категории!")
 
     # Редактирование задачи по ID
     def edit_task(
@@ -42,20 +54,17 @@ class TaskManager:
         for task in self.tasks_list:
             if task.id != id:
                 continue
-            task.title = title
-            task.description = description
-            task.category = category
-            task.due_date = due_date
-            task.priority = priority
-            task.status = status
+            task.edit_task(
+                title, description, category, due_date, priority, status
+            )
             break
 
-    # Редактирование статуса задачи
-    def edit_status_task(self, id):
+    # Отметка готовности статуса задачи
+    def ready_status_task(self, id):
         for task in self.tasks_list:
             if task.id != id:
                 continue
-            task.status = "выполнена"
+            task.status = "Выполнена"
             break
 
     # Удаление задачи по идентификатору
@@ -73,3 +82,11 @@ class TaskManager:
                 continue
             del task
             break
+
+    # Добавление данных в файл
+    def add_data_to_json(self):
+        data = []
+        for task in self.tasks_list:
+            data.append(task.dict_task())
+        with open("tasks.json", "w", encoding="utf-8") as file:
+            json.dump(data, file, ensure_ascii=False, indent=2)
