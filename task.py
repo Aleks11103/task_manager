@@ -24,4 +24,4 @@ class Task:
                 self.priority,
                 self.status,
             )
-        )
+        ) + "\n"
