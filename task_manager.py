@@ -71,7 +71,7 @@ class TaskManager:
         for task in self.tasks_list:
             if task.id != id:
                 continue
-            task.status = "Выполнена"
+            task.ready_status_task()
             break
 
     # Удаление задачи по идентификатору
@@ -79,7 +79,7 @@ class TaskManager:
         for task in self.tasks_list:
             if task.id != id:
                 continue
-            del task
+            self.tasks_list.remove(task)
             break
 
     # Удаление задачи по категории

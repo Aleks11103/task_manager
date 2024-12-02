@@ -5,7 +5,7 @@ while True:
     print(
         "\n".join(
             (
-                "Выберите номер действия:",
+                "\nВыберите номер действия:",
                 "0. Выход",  # +
                 "1. Показать весь список задач",  # +
                 "2. Просмотр задач по категории",  # + поиск по категории
@@ -59,9 +59,15 @@ while True:
                 id, title, description, category, due_date, priority, status
             )
         case 5:  # Отметка о выполнении задачи
-            pass
+            print(task_manager)
+            id = int(
+                input("Введите номер записи для установки статуса выполнено: ")
+            )
+            task_manager.ready_status_task(id)
         case 6:  # Удаление задачи по номеру
-            pass
+            print(task_manager)
+            id = int(input("Введите номер удаляемой записи: "))
+            task_manager.del_task_id(id)
         case 7:  # Удаление задач по категории
             pass
         case 8:  # Поиск по ключевым словам в названии задачи
