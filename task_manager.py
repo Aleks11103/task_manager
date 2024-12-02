@@ -87,7 +87,7 @@ class TaskManager:
         for task in self.tasks_list:
             if task.category != category:
                 continue
-            del task
+            self.tasks_list.remove(task)
             break
 
     # Добавление данных в файл

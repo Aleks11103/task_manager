@@ -69,7 +69,9 @@ while True:
             id = int(input("Введите номер удаляемой записи: "))
             task_manager.del_task_id(id)
         case 7:  # Удаление задач по категории
-            pass
+            print(task_manager)
+            category = input("Введите удаляемую категорию: ")
+            task_manager.del_task_category(category)
         case 8:  # Поиск по ключевым словам в названии задачи
             pass
         case 9:  # Поиск по статусу выполнения
