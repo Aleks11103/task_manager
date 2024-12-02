@@ -1,56 +1,56 @@
-import json
-
-
-class Task:
-    __id__ = 1      # id задачи, увелчивающийся с созданием новой задачи
-
-    def __init__(self, title, description, category, due_date, priority,
-                 status):
-        self.id = self.__id__
-        self.title = title
-        self.description = description
-        self.category = category
-        self.due_date = due_date
-        self.priority = priority
-        self.status = status
-        Task.__id__ += 1
-
-    def __str__(self):
-        return "\n".join((str(self.id), self.title, self.description,
-                          self.category, self.due_date, self.priority,
-                          self.status))
-
-
-class TaskManager:
-    def __init__(self):
-        with open("tasks.json", encoding="UTF-8") as f:
-            self.lst = json.load(f)
-        self.tasks_list = []
-        max_id = 1
-        for el in self.lst:
-            task = Task(el["title"], el["description"], el["category"],
-                        el["due_date"], el["priority"], el["status"])
-            self.tasks_list.append(task)
-            if el["id"] > max_id:
-                max_id = el["id"]
-        Task.__id__ = max_id + 1
-
-    def __str__(self):
-        lst = []
-        for el in self.tasks_list:
-            lst.append(el.__str__())
-        return "\n".join(lst)
-
-    def new_task(self):
-        pass
-
+from task_manager import TaskManager
 
 task_manager = TaskManager()
-task1 = Task("Проверка навыков Python",
-             "Прохождение теста на проверку навыков",
-             "Обучение",
-             "2024-12-01",
-             "Высокий",
-             "Не выполнена")
-print(task1)
-print(task_manager)
+while True:
+    print(
+        "\n".join(
+            (
+                "Выберите номер действия:",
+                "0. Выход",  # +
+                "1. Показать весь список задач",  # +
+                "2. Просмотр задач по категории",  # + поиск по категории
+                "3. Добавление новой задачи",  # +
+                "4. Редактирование существующей задачи",  # -
+                "5. Отметка о выполнении задачи",  # -
+                "6. Удаление задачи по номеру",  # -
+                "7. Удаление задач по категории",  # -
+                "8. Поиск по ключевым словам в названии задачи",  # -
+                "9. Поиск по статусу выполнения",  # -
+            )
+        )
+    )
+    command = int(input("Укажите номер комманды для выполнения: "))
+    match command:
+        case 0:  # Сохранение данных в файл и завершение работы программы
+            task_manager.add_data_to_json()
+            break
+        case 1:  # Отображение всего списка задач
+            print("\nСПИСОК ЗАДАЧ:\n")
+            print(task_manager)
+        case 2:  # Отображение задач по категории
+            category = input("Введите название категории для отображения: ")
+            print(f"СПИСОК ЗАДАЧ ПО КАТЕГОРИИ: {category.capitalize()}")
+            task_manager.show_category_tasks(category)
+        case 3:  # Добавление новой задачи
+            title = input("Введите название задачи: ")
+            description = input("Введите описание задачи: ")
+            category = input("Введите название категории для задачи: ")
+            due_date = input(
+                "Введите конечный срок задачи в формате(ГГГГ-ММ-ДД): "
+            )
+            priority = input("Введите уровень приоритета для задачи: ")
+            task_manager.new_task(
+                title, description, category, due_date, priority
+            )
+        case 4:  # Редактирование существующей задачи
+            pass
+        case 5:  # Отметка о выполнении задачи
+            pass
+        case 6:  # Удаление задачи по номеру
+            pass
+        case 7:  # Удаление задач по категории
+            pass
+        case 8:  # Поиск по ключевым словам в названии задачи
+            pass
+        case 9:  # Поиск по статусу выполнения
+            pass
