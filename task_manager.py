@@ -47,6 +47,13 @@ class TaskManager:
         else:
             print("Нет задач в данной категории!")
 
+    def show_number_task(self, id):
+        for task in self.tasks_list:
+            if task.id != id:
+                continue
+            print(task)
+            break
+
     # Редактирование задачи по ID
     def edit_task(
         self, id, title, description, category, due_date, priority, status

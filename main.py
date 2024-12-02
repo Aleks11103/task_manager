@@ -43,7 +43,21 @@ while True:
                 title, description, category, due_date, priority
             )
         case 4:  # Редактирование существующей задачи
-            pass
+            print(task_manager)
+            id = int(input("Введите номер записи для редактирования: "))
+            print(f"ЗАДАЧА С НОМЕРОМ {id}:\n")
+            task_manager.show_number_task(id)
+            print("\nВведите новые значения для редактируемых полей")
+            print("*поля без редактирования пропустите вводом пустой строки")
+            title = input("Название задачи: ")
+            description = input("Описание задачи: ")
+            category = input("Название категории для задачи: ")
+            due_date = input("Конечный срок задачи в формате(ГГГГ-ММ-ДД): ")
+            priority = input("Уровень приоритета для задачи: ")
+            status = input("Статус задачи: ")
+            task_manager.edit_task(
+                id, title, description, category, due_date, priority, status
+            )
         case 5:  # Отметка о выполнении задачи
             pass
         case 6:  # Удаление задачи по номеру

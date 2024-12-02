@@ -39,12 +39,18 @@ class Task:
     def edit_task(
         self, title, description, category, due_date, priority, status
     ):
-        self.title = title
-        self.description = description
-        self.category = category
-        self.due_date = due_date
-        self.priority = priority
-        self.status = status
+        if title:
+            self.title = title
+        if description:
+            self.description = description
+        if category:
+            self.category = category
+        if due_date:
+            self.due_date = due_date
+        if priority:
+            self.priority = priority
+        if status:
+            self.status = status
 
     # Установка задаче статуса готовности
     def ready_status_task(self):
