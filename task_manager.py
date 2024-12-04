@@ -8,6 +8,7 @@ class TaskManager:
         with open("tasks.json", encoding="UTF-8") as f:
             lst = json.load(f)
         self.tasks_list = []
+        self.ids_list = []
         max_id = 1
         for el in lst:
             task = Task(
@@ -19,23 +20,31 @@ class TaskManager:
                 el["status"],
             )
             self.tasks_list.append(task)
+            self.ids_list.append(el["id"])
             if el["id"] > max_id:
                 max_id = el["id"]
         Task.__id__ = max_id + 1
 
     # Вывод списка задач на экран
-    def __str__(self):
+    def __str__(self) -> str:
         return "\n".join([el.__str__() for el in self.tasks_list])
 
     # Создание новой задачи
-    def new_task(self, title, description, category, due_date, priority):
+    def new_task(
+        self,
+        title: str,
+        description: str,
+        category: str,
+        due_date: str,
+        priority: str
+    ) -> None:
         self.tasks_list.append(
             Task(title, description, category, due_date, priority)
         )
         print("Новая задача создана успешно")
 
     # Отображение задач выбранной категории
-    def show_category_tasks(self, category):
+    def show_category_tasks(self, category: str) -> None:
         flag = False
         counter = 0
         res = []
@@ -52,7 +61,7 @@ class TaskManager:
             print("Нет задач в данной категории!")
 
     # Отображение задачи по номеру
-    def show_number_task(self, id):
+    def show_number_task(self, id: int) -> None:
         for task in self.tasks_list:
             if task.id != id:
                 continue
@@ -61,8 +70,15 @@ class TaskManager:
 
     # Редактирование задачи по ID
     def edit_task(
-        self, id, title, description, category, due_date, priority, status
-    ):
+        self,
+        id: int,
+        title: str,
+        description: str,
+        category: str,
+        due_date: str,
+        priority: str, 
+        status: str
+    ) -> None:
         for task in self.tasks_list:
             if task.id != id:
                 continue
@@ -73,7 +89,7 @@ class TaskManager:
         print(f"Задача {id} отредактирована успешно")
 
     # Отметка готовности статуса задачи
-    def ready_status_task(self, id):
+    def ready_status_task(self, id: int) -> None:
         for task in self.tasks_list:
             if task.id != id:
                 continue
@@ -82,7 +98,7 @@ class TaskManager:
         print(f"Статус задачи {id}: выполнена")
 
     # Удаление задачи по идентификатору
-    def del_task_id(self, id):
+    def del_task_id(self, id: int) -> None:
         for task in self.tasks_list:
             if task.id != id:
                 continue
@@ -91,7 +107,7 @@ class TaskManager:
         print("Задача {id} удалена")
 
     # Удаление задачи по категории
-    def del_task_category(self, category):
+    def del_task_category(self, category: str) -> None:
         counter = 0
         for task in self.tasks_list:
             if task.category != category:
@@ -102,7 +118,7 @@ class TaskManager:
         print(f"Удалено {counter} задач(-а/-и)")
 
     # Добавление данных в файл
-    def add_data_to_json(self):
+    def add_data_to_json(self) -> None:
         data = []
         for task in self.tasks_list:
             data.append(task.dict_task())
@@ -110,14 +126,14 @@ class TaskManager:
             json.dump(data, file, ensure_ascii=False, indent=2)
 
     # Поиск в названии по ключевому слову
-    def search_by_key_word(self, key_word):
+    def search_by_key_word(self, key_word: str) -> None:
         print(f"\nСписок задач содержащих в названии: {key_word}")
         for task in self.tasks_list:
             if key_word.lower() in task.title.lower():
                 print(task)
 
     # Поиск по статусу
-    def search_by_status(self, status):
+    def search_by_status(self, status: str) -> None:
         print(f"\nСписок задач по статусу: {status}")
         for task in self.tasks_list:
             if status.lower() == task.status.lower():

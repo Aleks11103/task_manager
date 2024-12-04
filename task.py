@@ -3,13 +3,13 @@ class Task:
 
     def __init__(
         self,
-        title,
-        description,
-        category,
-        due_date,
-        priority,
-        status="не выполнена",
-    ):
+        title: str,
+        description: str,
+        category: str,
+        due_date: str,
+        priority: str,
+        status="не выполнена"
+    ) -> None:
         self.id = self.__id__
         self.title = title
         self.description = description
@@ -19,7 +19,7 @@ class Task:
         self.status = status
         Task.__id__ += 1
 
-    def __str__(self):
+    def __str__(self) -> str:
         return (
             "\n".join(
                 (
@@ -37,8 +37,14 @@ class Task:
 
     # Редактирование задачи
     def edit_task(
-        self, title, description, category, due_date, priority, status
-    ):
+        self,
+        title: str,
+        description: str,
+        category: str,
+        due_date: str,
+        priority: str,
+        status: str
+    ) -> None:
         if title:
             self.title = title
         if description:
@@ -53,11 +59,11 @@ class Task:
             self.status = status
 
     # Установка задаче статуса готовности
-    def ready_status_task(self):
+    def ready_status_task(self) -> None:
         self.status = "Выполнена"
 
     # Упаковка данных в словарь
-    def dict_task(self):
+    def dict_task(self) -> None:
         task_dict = {}
         task_dict["id"] = self.id
         task_dict["title"] = self.title
