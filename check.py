@@ -36,11 +36,14 @@ def check_str(s: str, message: str) -> str:
 
 
 # Проверка на ввод id
-def check_ids(s: str, message: str, tm: TaskManager) -> int:
+def check_id(s: str, message: str, tm: TaskManager) -> int:
     while True:
         if s.isdigit():
             num = int(s)
             if num in tm.ids_list:
                 return num
+            else:
+                print("Задачи с таким номером не существует!")
+        else:
             print("Ошибка! Вы ввели не число!")
-            s = input(message)
+        s = input(message)

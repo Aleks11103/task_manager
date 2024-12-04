@@ -17,7 +17,8 @@ class TaskManager:
                 el["category"],
                 el["due_date"],
                 el["priority"],
-                el["status"],
+                el["id"],
+                el["status"]
             )
             self.tasks_list.append(task)
             self.ids_list.append(el["id"])
@@ -41,6 +42,7 @@ class TaskManager:
         self.tasks_list.append(
             Task(title, description, category, due_date, priority)
         )
+        self.ids_list.append(self.tasks_list[-1].get_id())
         print("Новая задача создана успешно")
 
     # Отображение задач выбранной категории
@@ -76,7 +78,7 @@ class TaskManager:
         description: str,
         category: str,
         due_date: str,
-        priority: str, 
+        priority: str,
         status: str
     ) -> None:
         for task in self.tasks_list:
@@ -102,19 +104,24 @@ class TaskManager:
         for task in self.tasks_list:
             if task.id != id:
                 continue
+            self.ids_list.remove(task.get_id())
             self.tasks_list.remove(task)
             break
-        print("Задача {id} удалена")
+        print(f"Задача {id} удалена")
 
     # Удаление задачи по категории
     def del_task_category(self, category: str) -> None:
         counter = 0
-        for task in self.tasks_list:
-            if task.category != category:
+        i = 0
+        length = len(self.tasks_list)
+        while i < length:
+            if self.tasks_list[i].category.lower() != category.lower():
+                i += 1
                 continue
-            self.tasks_list.remove(task)
             counter += 1
-            break
+            self.ids_list.remove(self.tasks_list[i].get_id())
+            del self.tasks_list[i]
+            length -= 1
         print(f"Удалено {counter} задач(-а/-и)")
 
     # Добавление данных в файл

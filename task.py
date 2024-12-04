@@ -1,6 +1,7 @@
 class Task:
     __id__ = 1  # id задачи, увелчивающийся с созданием новой задачи
 
+    # Инициализация объекта класса
     def __init__(
         self,
         title: str,
@@ -8,17 +9,22 @@ class Task:
         category: str,
         due_date: str,
         priority: str,
+        id=0,
         status="не выполнена"
     ) -> None:
-        self.id = self.__id__
+        if id < 1:
+            self.id = self.__id__
+        else:
+            self.id = id
         self.title = title
         self.description = description
         self.category = category
         self.due_date = due_date
         self.priority = priority
         self.status = status
-        Task.__id__ += 1
+        Task.__id__ += 1 if Task.__id__ >= id else id + 1
 
+    # отображение объекта класса
     def __str__(self) -> str:
         return (
             "\n".join(
@@ -34,6 +40,10 @@ class Task:
             )
             + "\n"
         )
+
+    # Возвращение номера объекта
+    def get_id(self) -> int:
+        return self.id
 
     # Редактирование задачи
     def edit_task(
