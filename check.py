@@ -4,8 +4,10 @@ from task_manager import TaskManager
 
 
 # Проверка на корректность ввода даты
-def check_date(date: str, message: str) -> str:
+def check_date(date: str, message: str, empty=False) -> str:
     # Условие выхода из цикла ввод корректной даты
+    if empty:
+        return date
     while True:
         if re.fullmatch(r"20\d\d-[01]\d-[0123]\d", date):
             year = int(date[:4])
@@ -28,7 +30,7 @@ def check_str(s: str, message: str, empty=False) -> str:
     while True:
         if s.strip().isdigit():
             print("Ошибка! Строка не может состоять только из цифр")
-        elif s == "" or s.isspace() and not empty:
+        elif (s == "" or s.isspace()) and not empty:
             print("Ошибка! Строка не может быть пустой!")
         else:
             return s

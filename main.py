@@ -70,7 +70,7 @@ while True:
             mess_cat = "Название категории для задачи: "
             category = check_str(input(mess_cat), mess_cat, empty=True)
             mess_date = "Конечный срок задачи в формате(ГГГГ-ММ-ДД): "
-            due_date = check_date(input(mess_date), mess_date)
+            due_date = check_date(input(mess_date), mess_date, empty=True)
             mess_prior = "Уровень приоритета для задачи: "
             priority = check_str(input(mess_prior), mess_prior, empty=True)
             mess_status = "Статус задачи: "
@@ -103,3 +103,4 @@ while True:
             task_manager.search_by_status(status)
         case 10:  # Сохранить данные в файл
             task_manager.add_data_to_json()
+            print("Данные успешно сохранены в файл")
