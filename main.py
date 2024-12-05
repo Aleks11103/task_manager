@@ -64,17 +64,17 @@ while True:
             print("\nВведите новые значения для редактируемых полей")
             print("*поля без редактирования пропустите вводом пустой строки")
             mess_title = "Название задачи: "
-            title = check_str(input(mess_title), mess_title)
+            title = check_str(input(mess_title), mess_title, empty=True)
             mess_desc = "Описание задачи: "
-            description = check_str(input(mess_desc), mess_desc)
+            description = check_str(input(mess_desc), mess_desc, empty=True)
             mess_cat = "Название категории для задачи: "
-            category = check_str(input(mess_cat), mess_cat)
+            category = check_str(input(mess_cat), mess_cat, empty=True)
             mess_date = "Конечный срок задачи в формате(ГГГГ-ММ-ДД): "
             due_date = check_date(input(mess_date), mess_date)
             mess_prior = "Уровень приоритета для задачи: "
-            priority = check_str(input(mess_prior), mess_prior)
+            priority = check_str(input(mess_prior), mess_prior, empty=True)
             mess_status = "Статус задачи: "
-            status = check_str(input(mess_status), mess_status)
+            status = check_str(input(mess_status), mess_status, empty=True)
             task_manager.edit_task(
                 id, title, description, category, due_date, priority, status
             )

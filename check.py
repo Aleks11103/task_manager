@@ -24,11 +24,11 @@ def check_date(date: str, message: str) -> str:
 
 
 # Проверка на строку, не состоящую из пробелов или цифр
-def check_str(s: str, message: str) -> str:
+def check_str(s: str, message: str, empty=False) -> str:
     while True:
         if s.strip().isdigit():
             print("Ошибка! Строка не может состоять только из цифр")
-        elif s == "" or s.isspace():
+        elif s == "" or s.isspace() and not empty:
             print("Ошибка! Строка не может быть пустой!")
         else:
             return s
