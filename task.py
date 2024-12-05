@@ -10,7 +10,7 @@ class Task:
         due_date: str,
         priority: str,
         id=0,
-        status="не выполнена"
+        status="не выполнена",
     ) -> None:
         if id < 1:
             self.id = self.__id__
@@ -53,7 +53,7 @@ class Task:
         category: str,
         due_date: str,
         priority: str,
-        status: str
+        status: str,
     ) -> None:
         if title:
             self.title = title

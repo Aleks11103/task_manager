@@ -18,7 +18,7 @@ class TaskManager:
                 el["due_date"],
                 el["priority"],
                 el["id"],
-                el["status"]
+                el["status"],
             )
             self.tasks_list.append(task)
             self.ids_list.append(el["id"])
@@ -37,7 +37,7 @@ class TaskManager:
         description: str,
         category: str,
         due_date: str,
-        priority: str
+        priority: str,
     ) -> None:
         self.tasks_list.append(
             Task(title, description, category, due_date, priority)
@@ -79,7 +79,7 @@ class TaskManager:
         category: str,
         due_date: str,
         priority: str,
-        status: str
+        status: str,
     ) -> None:
         for task in self.tasks_list:
             if task.id != id:
